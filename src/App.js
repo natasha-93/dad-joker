@@ -1,27 +1,14 @@
 import React, { useState } from 'react';
+import Joke from "./Joke";
+import Button from "./Button";
 
 function App() {
   const [joke, setJoke] = useState("")
   const [loading, setLoading] = useState(false)
   return (
     <div>
-      <button onClick={e => {
-        setLoading(true)
-        fetch('https://icanhazdadjoke.com/', {
-          headers: {
-            'Accept': 'application/json'
-          },
-        })
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            setJoke(data.joke)
-            setLoading(false)
-          });
-      }}>
-        Click Me!</button>
-      <p>{loading ? "loading" : joke}</p>
+      <Button setJoke={setJoke} setLoading={setLoading} />
+      <Joke loading={loading}>{joke}</Joke>
     </div>
   );
 }
